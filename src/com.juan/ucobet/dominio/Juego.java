@@ -19,7 +19,7 @@ public class Juego {
     // Función responsable de comparar las boletas existentes con los números ganadores y devolver una lista de usuarios
     public List<Usuario> realizarSorteo(){
 
-        return this.usuarios.stream().filter(u -> u.getNumero == numeroganador).collect(Collectors.toList());
+        return this.usuarios.stream().filter(u -> u.getBoleta().getNumero() == numeroganador).collect(Collectors.toList());
 
     }
 
@@ -39,7 +39,7 @@ public class Juego {
     // Función encargada de mostrar una lista de elementos (Se puede reutilizar para imprimir la información de otros metodos)
     public void mostrarLista(List<Usuario> lista){
 
-        lista.forEach(u -> System.out.println(u.getNombre));
+        lista.forEach(u -> System.out.println(u.getNombre()));
 
     }
 }
