@@ -8,6 +8,7 @@ public class Juego {
 
     // Atributos
     private List<Usuario> usuarios = new ArrayList<>();
+    private int numeroGanador;
     private long recompensaUnaCifra;
     private long recompensaDosCifras;
     private long recompensaTresCifras;
@@ -19,7 +20,7 @@ public class Juego {
     // Función responsable de comparar las boletas existentes con los números ganadores y devolver una lista de usuarios
     public List<Usuario> realizarSorteo(){
 
-        return this.usuarios.stream().filter(u -> u.getBoleta().getNumero() == numeroganador).collect(Collectors.toList());
+        return this.usuarios.stream().filter(u -> u.getBoleta().getNumero() == this.numeroGanador).collect(Collectors.toList());
 
     }
 
@@ -41,5 +42,10 @@ public class Juego {
 
         lista.forEach(u -> System.out.println(u.getNombre()));
 
+    }
+
+    // Setters
+    public void setNumeroGanador(int numeroGanador) {
+        this.numeroGanador = numeroGanador;
     }
 }
