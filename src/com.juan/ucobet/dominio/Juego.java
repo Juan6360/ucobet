@@ -18,9 +18,9 @@ public class Juego {
 
     // realizarSorteo
     // Función responsable de comparar las boletas existentes con los números ganadores y devolver una lista de usuarios
-    public List<Usuario> realizarSorteo(){
+    public void realizarSorteo(){
 
-        return this.usuarios.stream().filter(u -> u.getBoleta().getNumero() == this.numeroGanador).collect(Collectors.toList());
+        //return this.usuarios.stream().filter(u -> u.getBoleta().getNumero() == this.numeroGanador).collect(Collectors.toList());
 
     }
 
