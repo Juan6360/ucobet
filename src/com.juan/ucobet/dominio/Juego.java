@@ -20,7 +20,7 @@ public class Juego {
     // Función responsable de comparar las boletas existentes con los números ganadores y devolver una lista de usuarios
     public List<Usuario> realizarSorteo(){
 
-        return this.usuarios.stream().filter(u -> u.getBoleta().getNumero() == this.numeroGanador).collect(Collectors.toList());
+        return null;
 
     }
 
@@ -35,6 +35,9 @@ public class Juego {
     public void multiplicadorPuja(){
 
     }
+
+    // participantesSorteo
+    // Función encargada de encontrar los participantes de un sorteo
 
     // mostrarLista
     // Función encargada de mostrar una lista de elementos (Se puede reutilizar para imprimir la información de otros metodos)
