@@ -6,19 +6,19 @@ import java.util.List;
 public class Usuario {
 
     // Atributos
-    private long identificacion;
     private String nombre;
+    private long identificacion;
     private String correo;
     private long celular;
     private List<Boleta> boletas = new ArrayList<>();
 
     // Constructor
-    public Usuario(long identificacion, String nombre, String correo, long celular, Boleta boleta) {
+    public Usuario(String nombre, long identificacion, String correo, long celular) {
         this.identificacion = identificacion;
         this.nombre = nombre;
         this.correo = correo;
         this.celular = celular;
-//        this.boleta = boleta;
+
     }
 
     public void crearBoleta(int numero, int puja){
@@ -29,6 +29,11 @@ public class Usuario {
     }
 
     // Getters
+
+
+    public List<Boleta> getBoletas() {
+        return boletas;
+    }
 
     public String getNombre() {
         return nombre;
