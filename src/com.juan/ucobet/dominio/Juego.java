@@ -1,6 +1,9 @@
 package com.juan.ucobet.dominio;
 
+import java.time.Clock;
+import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -9,6 +12,9 @@ public class Juego {
     // Atributos
     private List<Usuario> usuarios = new ArrayList<>();
     private int numeroGanador;
+    private Clock hora;
+    private LocalDate fecha;
+    private double porcentajeMultiplicador;
     private long recompensaUnaCifra;
     private long recompensaDosCifras;
     private long recompensaTresCifras;
@@ -47,7 +53,45 @@ public class Juego {
 
     }
 
+    public void mostrarBoletas(Usuario usuario){
+
+        usuario.getBoletas().forEach(b -> System.out.println(b.toString()));
+
+    }
+
+    // Getters
+
+
+    public Clock getHora() {
+        return hora;
+    }
+
+    public LocalDate getFecha() {
+        return fecha;
+    }
+
+    public long getRecompensaUnaCifra() {
+        return recompensaUnaCifra;
+    }
+
+    public long getRecompensaDosCifras() {
+        return recompensaDosCifras;
+    }
+
+    public long getRecompensaTresCifras() {
+        return recompensaTresCifras;
+    }
+
+    public long getRecompensaCuatroCifras() {
+        return recompensaCuatroCifras;
+    }
+
     // Setters
+
+    public void setFecha(LocalDate fecha) {
+        this.fecha = fecha;
+    }
+
     public void setNumeroGanador(int numeroGanador) {
         this.numeroGanador = numeroGanador;
     }
