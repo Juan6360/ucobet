@@ -4,13 +4,21 @@ import com.juan.ucobet.dominio.Boleta;
 import com.juan.ucobet.dominio.Juego;
 import com.juan.ucobet.dominio.Usuario;
 
+import java.time.LocalDate;
+import java.util.Date;
+import java.util.Locale;
+
 public class Admin extends Usuario {
 
     // Atributos
+    private String pass;
 
     // Constructor
-    public Admin(long identificacion, String nombre, String correo, long celular, Boleta boleta) {
-        super(identificacion, nombre, correo, celular, boleta);
+    public Admin(String nombre, long identificacion, String correo, long celular, String pass) {
+
+        super(nombre, identificacion, correo, celular);
+        this.pass = pass;
+
     }
 
     // Metodos
@@ -29,9 +37,11 @@ public class Admin extends Usuario {
 
     }
 
-    // escogerHoraAJugar
+    // escogerFecha
     // Función encargada de establecer la hora a la que se realiza el sorteo
-    public void escogerHoraAJugar(){
+    public void escogerFecha(Juego juego, LocalDate fecha){
+
+        juego.setFecha(fecha);
 
     }
 
