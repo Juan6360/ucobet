@@ -22,8 +22,4 @@ public class Boleta {
     public int getNumero() {
         return numero;
     }
-
-    public long getPuja() {
-        return puja;
-    }
 }
