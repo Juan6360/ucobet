@@ -31,7 +31,19 @@ public class Juego {
     // Función responsable de comparar las boletas existentes con los números ganadores y devolver una lista de usuarios
     public List<Usuario> realizarSorteo(){
 
-        return this.usuarios.stream().filter(u -> u.getBoletas().stream().anyMatch(b -> b.getNumero() == this.numeroGanador)).collect(Collectors.toList());
+        return this.usuarios.stream().filter(u -> u.getBoletas().stream().anyMatch(b -> {
+                                                                                        if (String.valueOf(b.getNumero()).equals(String.valueOf(this.numeroGanador))){
+                                                                                            return true;
+                                                                                        } else if (String.valueOf(b.getNumero()).substring(1).equals(String.valueOf(this.numeroGanador).substring(1))) {
+                                                                                            return true;
+                                                                                        }else if (String.valueOf(b.getNumero()).substring(2).equals(String.valueOf(this.numeroGanador).substring(2))) {
+                                                                                            return true;
+                                                                                        }else if (String.valueOf(b.getNumero()).substring(3).equals(String.valueOf(this.numeroGanador).substring(3))) {
+                                                                                            return true;
+                                                                                        }
+                                                                                        return false;
+                                                                                        }))
+                                                                                        .collect(Collectors.toList());
     }
 
     // pagarUsuarios
