@@ -9,7 +9,7 @@ public class Juego {
 
     // Atributos
     private List<Usuario> usuarios = new ArrayList<>();
-    private List<String> numerosVetados = new ArrayList<String>();
+    private List<Integer> numerosVetados = new ArrayList<>();
     private int numeroGanador;
     private Clock hora;
     private LocalDate fecha;
@@ -60,27 +60,11 @@ public class Juego {
 
     public void numerosAVetar(int numeroAVetar){
         //agrega los numeros a la lista numerosVetados
-        numerosVetados.add(String.valueOf(numeroAVetar));
+        numerosVetados.add(numeroAVetar);
 
 
     }
 
-
-    public boolean comparadorNumerosVetados(int numero){
-        List<Character> listaCaracteres = new ArrayList<>();
-
-        for (char c : String.valueOf(numero).toCharArray()) {
-            listaCaracteres.add(c);
-        }
-        for (String numStr : numerosVetados) {
-            char numChar = numStr.charAt(0);
-            if (listaCaracteres.contains(numChar)) {
-                return true;
-            }
-        }
-
-        return false;
-    }
     // Getters
 
 
@@ -111,7 +95,7 @@ public class Juego {
     //get para obtener la lista de numeros Vetados
     public String getNumerosVetados() {
         String datosArray = "";
-        for (String elemento: numerosVetados) {
+        for (int elemento: numerosVetados) {
             datosArray += elemento + " ";
         }
         return datosArray;
