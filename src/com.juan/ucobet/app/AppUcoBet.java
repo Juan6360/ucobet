@@ -128,12 +128,19 @@ public class AppUcoBet {
                                         case 1:
 
                                             in.nextLine(); // Limpiar el buffer
+                                            int numero = 0;
+                                            boolean condicion ;
+                                            do{
+                                                System.out.println("Los numeros vetados son: "+ juego.getNumerosVetados());
 
-                                            System.out.println("Los numeros vetados son: "+ juego.getNumerosVetados());
+                                                // Logica para la creacion de boletas
+                                                System.out.println("Ingrese numero a jugar: ");
+                                                numero = Integer.parseInt(in.nextLine());
 
-                                            // Logica para la creacion de boletas
-                                            System.out.println("Ingrese numero a jugar: ");
-                                            int numero = Integer.parseInt(in.nextLine());
+                                                condicion = juego.comparadorNumerosVetados(numero);
+
+
+                                            }while(condicion == true);
 
                                             System.out.println("Ingrese numero la puja: ");
                                             int puja = Integer.parseInt(in.nextLine());
