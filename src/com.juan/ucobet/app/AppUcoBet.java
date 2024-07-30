@@ -308,6 +308,8 @@ public class AppUcoBet {
 
                             // Mostrar balance
                             case 3:
+                                System.out.println("Balance actual: ");
+                                juego.mostrarBalance();
                                 break;
 
                             // Mostrar usuarios registrados

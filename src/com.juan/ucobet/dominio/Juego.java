@@ -40,9 +40,9 @@ public class Juego {
                                                                                             return true;
                                                                                         } else if (String.valueOf(b.getNumero()).substring(1).equals(String.valueOf(this.numeroGanador).substring(1))) {
                                                                                             return true;
-                                                                                        }else if (String.valueOf(b.getNumero()).substring(2).equals(String.valueOf(this.numeroGanador).substring(2))) {
+                                                                                        } else if (String.valueOf(b.getNumero()).substring(2).equals(String.valueOf(this.numeroGanador).substring(2))) {
                                                                                             return true;
-                                                                                        }else if (String.valueOf(b.getNumero()).substring(3).equals(String.valueOf(this.numeroGanador).substring(3))) {
+                                                                                        } else if (String.valueOf(b.getNumero()).substring(3).equals(String.valueOf(this.numeroGanador).substring(3))) {
                                                                                             return true;
                                                                                         }
                                                                                         return false;
@@ -53,7 +53,21 @@ public class Juego {
     // pagarUsuarios
     public void pagarGanadoresUnaCifra(List<Usuario> ganadores){
 
+        ganadores.forEach(u -> u.getBoletas().stream().anyMatch(b -> {
+                                                                    if (String.valueOf(b.getNumero()).equals(String.valueOf(this.numeroGanador))){
+                                                                        this.deudas += (long) (recompensaCuatroCifras * (b.getPuja() + (b.getPuja() * porcentajeMultiplicador)));
+                                                                        return true;
+                                                                    } else if (String.valueOf(b.getNumero()).substring(1).equals(String.valueOf(this.numeroGanador).substring(1))){
+                                                                        this.deudas += (long) (recompensaTresCifras * (b.getPuja() + (b.getPuja() * porcentajeMultiplicador)));
+                                                                    } else if (String.valueOf(b.getNumero()).substring(2).equals(String.valueOf(this.numeroGanador).substring(2))){
+                                                                        this.deudas += (long) (recompensaDosCifras * (b.getPuja() + (b.getPuja() * porcentajeMultiplicador)));
+                                                                    } else if (String.valueOf(b.getNumero()).substring(3).equals(String.valueOf(this.numeroGanador).substring(3))){
+                                                                        this.deudas += (long) (recompensaUnaCifra * (b.getPuja() + (b.getPuja() * porcentajeMultiplicador)));
+                                                                    }
+                                                                    return false;
+                                                                    }));
 
+        System.out.println(this.deudas);
 
     }
 
@@ -194,7 +208,8 @@ public class Juego {
                 LocalDateTime ahora = LocalDateTime.now();
 
                 if (ahora.isAfter(fecha)) {
-                    realizarSorteo();
+
+                    pagarGanadoresUnaCifra(realizarSorteo());
                     break; // Salir del bucle después de realizar el sorteo
                 }
 
