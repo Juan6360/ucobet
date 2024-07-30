@@ -293,10 +293,10 @@ public class AppUcoBet {
                             case 4:
                                 System.out.println("Usuarios registrados:");
                                 for (Usuario usuario : juego.getUsuarios()) {
-                                    System.out.println("Nombre: " + usuario.getNombre());
-                                    System.out.println("Cédula: " + usuario.getIdentificacion());
-                                    System.out.println("Correo: " + usuario.getCorreo());
-                                    System.out.println("Celular: " + usuario.getCelular());
+                                    System.out.println(STR."Nombre: \{usuario.getNombre()}");
+                                    System.out.println(STR."Cédula: \{usuario.getIdentificacion()}");
+                                    System.out.println(STR."Correo: \{usuario.getCorreo()}");
+                                    System.out.println(STR."Celular: \{usuario.getCelular()}");
 
                                 }
                                 break;
