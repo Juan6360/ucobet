@@ -1,18 +1,19 @@
 package com.juan.ucobet.dominio;
 
-import java.time.Clock;
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class Juego {
 
     // Atributos
     private List<Usuario> usuarios = new ArrayList<>();
-    private List<Integer> numerosVetados = new ArrayList<>();
+    private long ingresos;
+    private long deudas;
+    private List<String> numerosVetados = new ArrayList<String>();
     private int numeroGanador;
-    private Clock hora;
-    private LocalDate fecha;
+    private LocalDateTime fecha;
     private double porcentajeMultiplicador;
     private long recompensaUnaCifra;
     private long recompensaDosCifras;
@@ -21,16 +22,36 @@ public class Juego {
 
     // Metodos
 
+    // registrarUsuario
+    public void registrarUsuario(Usuario usuario){
+        this.usuarios.add(usuario);
+    }
+
     // realizarSorteo
     // Función responsable de comparar las boletas existentes con los números ganadores y devolver una lista de usuarios
     public List<Usuario> realizarSorteo(){
 
-        return null;
+        return this.usuarios.stream().filter(u -> u.getBoletas().stream().anyMatch(b -> b.getNumero() == this.numeroGanador)).collect(Collectors.toList());
     }
 
-    // mostrarGanancias
+    // pagarUsuarios
+    public void pagarGanadoresUnaCifra(List<Usuario> ganadores){
+
+        ganadores.stream().filter(u -> u.getBoletas().forEach(b -> String.valueOf(b.getNumero())));
+
+//        ganadores.forEach(u -> u.getBoletas().forEach(b -> this.deudas += (long) (this.recompensaUnaCifra * (b.getPuja() + (b.getPuja() * this.porcentajeMultiplicador)))));
+
+    }
+
+    // mostrarBalance
     // Función encargada de mostrar las ganancias/perdidas generadas luego de realizar el sorteo
     public void mostrarBalance() {
+
+        this.usuarios.forEach(u -> u.getBoletas().forEach(b -> this.ingresos += b.getPuja()));
+
+        long balance = this.ingresos - this.deudas;
+
+        System.out.println(balance);
 
     }
     // multiplicarPuja
@@ -39,14 +60,11 @@ public class Juego {
 
     }
 
-    // participantesSorteo
-    // Función encargada de encontrar los participantes de un sorteo
-
     // mostrarLista
     // Función encargada de mostrar una lista de elementos (Se puede reutilizar para imprimir la información de otros metodos)
-    public void mostrarLista(List<Usuario> lista){
+    public void mostrarLista(){
 
-        lista.forEach(u -> System.out.println(u.getNombre()));
+        this.usuarios.forEach(u -> System.out.println(u.getNombre()));
 
     }
 
@@ -58,19 +76,30 @@ public class Juego {
 
     public void numerosAVetar(int numeroAVetar){
         //agrega los numeros a la lista numerosVetados
-        numerosVetados.add(numeroAVetar);
+        numerosVetados.add(String.valueOf(numeroAVetar));
 
 
     }
 
+
+    public boolean comparadorNumerosVetados(int numero){
+        List<Character> listaCaracteres = new ArrayList<>();
+
+        for (char c : String.valueOf(numero).toCharArray()) {
+            listaCaracteres.add(c);
+        }
+        for (String numStr : numerosVetados) {
+            char numChar = numStr.charAt(0);
+            if (listaCaracteres.contains(numChar)) {
+                return true;
+            }
+        }
+
+        return false;
+    }
     // Getters
 
-
-    public Clock getHora() {
-        return hora;
-    }
-
-    public LocalDate getFecha() {
+    public LocalDateTime getFecha() {
         return fecha;
     }
 
@@ -93,7 +122,7 @@ public class Juego {
     //get para obtener la lista de numeros Vetados
     public String getNumerosVetados() {
         String datosArray = "";
-        for (int elemento: numerosVetados) {
+        for (String elemento: numerosVetados) {
             datosArray += elemento + " ";
         }
         return datosArray;
@@ -101,7 +130,7 @@ public class Juego {
 
     // Setters
 
-    public void setFecha(LocalDate fecha) {
+    public void setFecha(LocalDateTime fecha) {
         this.fecha = fecha;
     }
 
@@ -109,5 +138,23 @@ public class Juego {
         this.numeroGanador = numeroGanador;
     }
 
+    public void setPorcentajeMultiplicador(double porcentajeMultiplicador) {
+        this.porcentajeMultiplicador = porcentajeMultiplicador;
+    }
 
+    public void setRecompensaUnaCifra(long recompensaUnaCifra) {
+        this.recompensaUnaCifra = recompensaUnaCifra;
+    }
+
+    public void setRecompensaDosCifras(long recompensaDosCifras) {
+        this.recompensaDosCifras = recompensaDosCifras;
+    }
+
+    public void setRecompensaTresCifras(long recompensaTresCifras) {
+        this.recompensaTresCifras = recompensaTresCifras;
+    }
+
+    public void setRecompensaCuatroCifras(long recompensaCuatroCifras) {
+        this.recompensaCuatroCifras = recompensaCuatroCifras;
+    }
 }

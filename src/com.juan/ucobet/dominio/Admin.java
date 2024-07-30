@@ -1,12 +1,6 @@
 package com.juan.ucobet.dominio;
 
-import com.juan.ucobet.dominio.Boleta;
-import com.juan.ucobet.dominio.Juego;
-import com.juan.ucobet.dominio.Usuario;
-
 import java.time.LocalDate;
-import java.util.Date;
-import java.util.Locale;
 
 public class Admin extends Usuario {
 

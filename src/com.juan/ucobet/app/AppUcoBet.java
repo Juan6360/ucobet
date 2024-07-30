@@ -5,18 +5,21 @@ import com.juan.ucobet.dominio.Admin;
 import com.juan.ucobet.dominio.Juego;
 import com.juan.ucobet.dominio.Usuario;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.util.Scanner;
 
 import static java.lang.StringTemplate.STR;
 
 public class AppUcoBet {
-        public static void main(String[] args) {
+    public static void main(String[] args) {
 
-            Juego juego = new Juego();
-            Scanner in = new Scanner(System.in);
-            int opc = 0;
+        DateTimeFormatter formato = DateTimeFormatter.ofPattern("dd-MM-yy HH:mm");
+
+        Juego juego = new Juego();
+        Scanner in = new Scanner(System.in);
+        int opc = 0;
 
             /*
             Menu 1:
@@ -52,200 +55,256 @@ public class AppUcoBet {
                 * Me devuelve al menu 1
              */
 
-            // Inicio de la app
+        // Inicio de la app
 
-            while(opc != 3){
+        while(opc != 3){
 
-                // Menu principal
+            // Menu principal
 
-                System.out.println("Bienvenido a UCO BET, seleccione una opción:");
-                System.out.println("1.- Usuario");
-                System.out.println("2.- Administrador");
-                System.out.println("3.- Exit");
-                opc = in.nextInt();
+            System.out.println("Bienvenido a UCO BET, seleccione una opción:");
+            System.out.println("1.- Usuario");
+            System.out.println("2.- Administrador");
+            System.out.println("3.- Exit");
+            opc = in.nextInt();
 
-                // Switch del menu principal
+            // Switch del menu principal
 
-                switch (opc) {
+            switch (opc) {
 
-                    // Aplicacion usuario
-                    case 1:
+                // Aplicacion usuario
+                case 1:
 
-                        // Variable que almacena la decisión de usuario en el submenu de usuario
-                        int opc_usuario = 0;
+                    // Variable que almacena la decisión de usuario en el submenu de usuario
+                    int opc_usuario = 0;
 
-                        // Lógica para ingresar usuario
+                    // Lógica para ingresar usuario
 
-                        in.nextLine(); // Limpiar el buffer
+                    in.nextLine(); // Limpiar el buffer
 
-                        System.out.println("Ingrese su nombre: ");
-                        String nombre = in.nextLine();
+                    System.out.println("Ingrese su nombre: ");
+                    String nombre = in.nextLine();
 
-                        System.out.println("Ingrese su Cedula: ");
-                        int identificacion = Integer.parseInt(in.nextLine());
+                    System.out.println("Ingrese su Cedula: ");
+                    int identificacion = Integer.parseInt(in.nextLine());
 
-                        System.out.println("Ingrese su correo: ");
-                        String correo = in.nextLine();
+                    System.out.println("Ingrese su correo: ");
+                    String correo = in.nextLine();
 
-                        System.out.println("Ingrese su celular: ");
-                        long celular = Long.parseLong(in.nextLine());
+                    System.out.println("Ingrese su celular: ");
+                    long celular = Long.parseLong(in.nextLine());
 
-                        // Creacion del usuario
-                        Usuario nuevoUsuario = new Usuario(nombre, identificacion, correo, celular);
+                    // Creacion del usuario
+                    Usuario nuevoUsuario = new Usuario(nombre, identificacion, correo, celular);
+                    juego.registrarUsuario(nuevoUsuario);
 
-                        // Ciclo del submenu de usuario
-                        while(opc_usuario != 3){
+                    // Ciclo del submenu de usuario
+                    while(opc_usuario != 3){
 
-                            System.out.println("1.- Jugar sorteo.");
-                            System.out.println("2.- Ver historial de juego.");
-                            System.out.println("3.- Cerrar sesión");
-                            opc_usuario = in.nextInt();
+                        System.out.println("1.- Jugar sorteo.");
+                        System.out.println("2.- Ver historial de juego.");
+                        System.out.println("3.- Cerrar sesión");
+                        opc_usuario = in.nextInt();
 
-                            // Switch del submenu de usuario
-                            switch (opc_usuario){
+                        // Switch del submenu de usuario
+                        switch (opc_usuario){
 
-                                // Jugar sorteo
-                                case 1:
+                            // Jugar sorteo
+                            case 1:
 
-                                    // Variable que almacena la opcion del menu de juego
-                                    int opc_boleta;
+                                // Variable que almacena la opcion del menu de juego
+                                int opc_boleta;
 
-                                    // Menu del juego
+                                // Menu del juego
 
-                                    System.out.println(STR."Recompensas: \nFecha: \{juego.getFecha()} | \{juego.getHora()}");
-                                    System.out.println(STR."Sorteo una cifra: \{juego.getRecompensaUnaCifra()}");
-                                    System.out.println(STR."Sorteo dos cifras: \{juego.getRecompensaDosCifras()}");
-                                    System.out.println(STR."Sorteo tres cifras: \{juego.getRecompensaTresCifras()}");
-                                    System.out.println(STR."Sorteo cuatro cifras: \{juego.getRecompensaCuatroCifras()}");
-                                    System.out.println("1. Comprar boleta.");
-                                    System.out.println("2. Volver.");
-                                    opc_boleta = in.nextInt();
+                                System.out.println(STR."Recompensas: \nFecha: \{juego.getFecha().format(formato)}");
+                                System.out.println(STR."Sorteo una cifra: \{juego.getRecompensaUnaCifra()}");
+                                System.out.println(STR."Sorteo dos cifras: \{juego.getRecompensaDosCifras()}");
+                                System.out.println(STR."Sorteo tres cifras: \{juego.getRecompensaTresCifras()}");
+                                System.out.println(STR."Sorteo cuatro cifras: \{juego.getRecompensaCuatroCifras()}");
+                                System.out.println("1. Comprar boleta.");
+                                System.out.println("2. Volver.");
+                                opc_boleta = in.nextInt();
 
-                                    // Switch para el juego
-                                    switch (opc_boleta){
+                                // Switch para el juego
+                                switch (opc_boleta){
 
-                                        // Comprar boleta
-                                        case 1:
+                                    // Comprar boleta
+                                    case 1:
 
-                                            in.nextLine(); // Limpiar el buffer
+                                        in.nextLine(); // Limpiar el buffer
 
-                                            System.out.println("Los numeros vetados son: "+ juego.getNumerosVetados());
+                                        System.out.println(STR."Los numeros vetados son: \{juego.getNumerosVetados()}");
 
-                                            // Logica para la creacion de boletas
-                                            System.out.println("Ingrese numero a jugar: ");
-                                            int numero = Integer.parseInt(in.nextLine());
+                                        // Logica para la creacion de boletas
+                                        System.out.println("Ingrese numero a jugar: ");
+                                        int numero = Integer.parseInt(in.nextLine());
 
-                                            System.out.println("Ingrese numero la puja: ");
-                                            int puja = Integer.parseInt(in.nextLine());
+                                        System.out.println("Ingrese numero la puja: ");
+                                        int puja = Integer.parseInt(in.nextLine());
 
-                                            System.out.println("Su boleta a sido creada.");
+                                        System.out.println("Su boleta a sido creada.");
 
-                                            // Creacion de nueva boleta
-                                            nuevoUsuario.crearBoleta(numero, puja);
+                                        // Creacion de nueva boleta
+                                        nuevoUsuario.crearBoleta(numero, puja);
 
-                                            break;
-
-                                        // Volver
-                                        case 2:
-                                            break;
-                                    }
-                                    break;
-
-                                // Ver historial
-                                case 2:
-
-                                    juego.mostrarBoletas(nuevoUsuario);
-
-                                    in.nextLine(); // Limpiar el buffer
-
-                                    System.out.println("\n1. Volver.");
-                                    int opc_historial = Integer.parseInt(in.nextLine());
-
-                                    if (opc_historial == 1){
                                         break;
-                                    }
 
-                                case 3:
+                                    // Volver
+                                    case 2:
+                                        break;
+                                }
+                                break;
 
-                                    System.out.println("Saliendo...");
+                            // Ver historial
+                            case 2:
 
+                                juego.mostrarBoletas(nuevoUsuario);
+
+                                in.nextLine(); // Limpiar el buffer
+
+                                System.out.println("\n1. Volver.");
+                                int opc_historial = Integer.parseInt(in.nextLine());
+
+                                if (opc_historial == 1){
                                     break;
-                            }
+                                }
 
+                            case 3:
+
+                                System.out.println("Saliendo...");
+
+                                break;
                         }
-                        break;
 
-                    // Aplicacion Admin
-                    case 2:
+                    }
+                    break;
 
-                        // Variable encargada de almacenar la eleccion del menu de admin
-                        int opc_admin = 0;
+                // Aplicacion Admin
+                case 2:
 
-                        // Lógica para ingresar admin
+                    // Variable encargada de almacenar la eleccion del menu de admin
+                    int opc_admin = 0;
 
-                        in.nextLine(); // Limpiar el buffer
+                    // Lógica para ingresar admin
 
-                        System.out.println("Ingrese su nombre: ");
-                        String nombre_admin = in.nextLine();
+                    in.nextLine(); // Limpiar el buffer
 
-                        System.out.println("Ingrese su Cedula: ");
-                        int identificacion_admin = Integer.parseInt(in.nextLine());
+                    System.out.println("Ingrese su nombre: ");
+                    String nombre_admin = in.nextLine();
 
-                        System.out.println("Ingrese su correo: ");
-                        String correo_admin = in.nextLine();
+                    System.out.println("Ingrese su Cedula: ");
+                    int identificacion_admin = Integer.parseInt(in.nextLine());
 
-                        System.out.println("Ingrese su celular: ");
-                        long celular_admin = Long.parseLong(in.nextLine());
+                    System.out.println("Ingrese su correo: ");
+                    String correo_admin = in.nextLine();
 
-                        System.out.println("Ingrese su password: ");
-                        String pass = in.nextLine();
+                    System.out.println("Ingrese su celular: ");
+                    long celular_admin = Long.parseLong(in.nextLine());
 
-                        // Creacion del admin
-                        Admin nuevoAdmin = new Admin(nombre_admin, identificacion_admin, correo_admin, celular_admin, pass);
+                    System.out.println("Ingrese su password: ");
+                    String pass = in.nextLine();
 
-                        // Ciclo submenu admin
-                        while (opc_admin != 4){
-                            // Menu sorteo
+                    // Creacion del admin
+                    Admin nuevoAdmin = new Admin(nombre_admin, identificacion_admin, correo_admin, celular_admin, pass);
 
-                            System.out.println("1. Crear un sorteo.");
-                            System.out.println("2. Vetar un numero.");
-                            System.out.println("3. Balance.");
-                            System.out.println("4. Cerrar sesion.");
-                            opc_admin = in.nextInt();
+                    // Ciclo submenu admin
+                    while (opc_admin != 4){
 
-                            // Switch submenu admin
-                            switch (opc_admin){
+                        // Menu sorteo
 
-                                // Crear un sorteo
-                                case 1:
+                        System.out.println("1. Crear un sorteo.");
+                        System.out.println("2. Vetar un numero.");
+                        System.out.println("3. Balance.");
+                        System.out.println("4. usuarios registrados.");
+                        System.out.println("5. cerrar sesion.");
 
-                                    // Logica para la creacion de un sorteo
 
-                                // Vetar numeros
-                                case 2:
-                                    // pregunta cuantos son los numeros que se van a vetar en el sorteo actual
-                                    System.out.println("¿cuantos numeros va a vetar del sorteo?");
-                                    int cantidadNumVetar = in.nextInt();
+                        opc_admin = in.nextInt();
 
-                                    //for que ingresa los numeros que se vetaran
-                                    for (int i = 0; i < cantidadNumVetar ; i++) {
-                                        System.out.println("Ingresa el nuermo que vas a vetar");
-                                        int varNumVetar = in.nextInt();
+                        // Switch submenu admin
+                        switch (opc_admin){
 
-                                        juego.numerosAVetar(varNumVetar);
-                                    }
+                            // Crear un sorteo
+                            case 1:
 
-                                    System.out.println("Numeros vetados: "+ juego.getNumerosVetados());
+                                // Logica para la creacion de un sorteo
 
-                                // Mostrar balance
-                                case 3:
+                                in.nextLine(); // Limpiar el buffer
 
-                                // Volver al menu 1
-                                case 4:
-                            }
+                                System.out.println("Ingrese el dia en que juega (dd-MM-yy HH:mm): ");
+                                String fecha = in.nextLine();
+
+                                // Invocacion de la funcion escogerFecha en Admin
+                                nuevoAdmin.escogerFecha(juego, fecha);
+
+                                System.out.println("Ingrese el multiplicador (0.0): ");
+                                double mult = Double.parseDouble(in.nextLine());
+
+                                nuevoAdmin.escogerMultiplicador(juego, mult);
+
+                                System.out.println("Recompensa por obtener una cifra correcta: ");
+                                long recompensaUnaCifra = Long.parseLong(in.nextLine());
+
+                                System.out.println("Recompensa por obtener dos cifras correctas: ");
+                                long recompensaDosCifras = Long.parseLong(in.nextLine());
+
+                                System.out.println("Recompensa por obtener tres cifras correctas: ");
+                                long recompensaTresCifras = Long.parseLong(in.nextLine());
+
+                                System.out.println("Recompensa por obtener cuatro cifras correctas: ");
+                                long recompensaCuatroCifras = Long.parseLong(in.nextLine());
+
+                                // Invocacion metodo para establecer recompensa
+
+                                nuevoAdmin.escogerRecompensa(juego, recompensaUnaCifra, recompensaDosCifras, recompensaTresCifras, recompensaCuatroCifras);
+
+                                break;
+
+                            // Vetar numeros
+                            case 2:
+                                // Pregunta cuantos son los numeros que se van a vetar en el sorteo actual
+                                System.out.println("¿cuantos numeros va a vetar del sorteo?");
+                                int cantidadNumVetar = in.nextInt();
+
+                                //for que ingresa los numeros que se vetaran
+                                for (int i = 0; i < cantidadNumVetar ; i++) {
+                                    System.out.println("Ingresa el nuermo que vas a vetar");
+                                    int varNumVetar = in.nextInt();
+
+                                    juego.numerosAVetar(varNumVetar);
+                                }
+
+                                System.out.println(STR."Numeros vetados: \{juego.getNumerosVetados()}");
+
+                                break;
+
+                            // Mostrar balance
+                            case 3:
+
+
+
+                                //usuarios registrados
+
+                            case 4:
+                                // Mostrar usuarios registrados
+                                System.out.println("Usuarios registrados:");
+                                for (Usuario usuario : juego.getUsuarios()) {
+                                    System.out.println("Nombre: " + usuario.getNombre());
+                                    System.out.println("Cédula: " + usuario.getIdentificacion());
+                                    System.out.println("Correo: " + usuario.getCorreo());
+                                    System.out.println("Celular: " + usuario.getCelular());
+
+                                }
+                                break;
+
+                            case 5:
+                                // Cerrar sesión
+                                break;
                         }
-                }
-
+                    }
             }
+
         }
+
     }
+}
