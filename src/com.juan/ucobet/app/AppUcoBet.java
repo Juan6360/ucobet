@@ -249,6 +249,11 @@ public class AppUcoBet {
 
                                 nuevoAdmin.escogerMultiplicador(juego, mult);
 
+                                System.out.println("Ingrese el numero ganador: ");
+                                int numeroGanador = Integer.parseInt(in.nextLine());
+
+                                nuevoAdmin.escogerNumerosGanadores(juego, numeroGanador);
+
                                 System.out.println("Recompensa por obtener una cifra correcta: ");
                                 long recompensaUnaCifra = Long.parseLong(in.nextLine());
 

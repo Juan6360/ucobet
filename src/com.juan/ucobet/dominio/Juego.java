@@ -37,9 +37,7 @@ public class Juego {
     // pagarUsuarios
     public void pagarGanadoresUnaCifra(List<Usuario> ganadores){
 
-//        ganadores.stream().filter(u -> u.getBoletas().forEach(b -> String.valueOf(b.getNumero())));
 
-//        ganadores.forEach(u -> u.getBoletas().forEach(b -> this.deudas += (long) (this.recompensaUnaCifra * (b.getPuja() + (b.getPuja() * this.porcentajeMultiplicador)))));
 
     }
 
@@ -52,11 +50,6 @@ public class Juego {
         long balance = this.ingresos - this.deudas;
 
         System.out.println(balance);
-
-    }
-    // multiplicarPuja
-    // Función encargada de mutliplicar la recompensa por cada peso invertido
-    public void multiplicadorPuja(){
 
     }
 

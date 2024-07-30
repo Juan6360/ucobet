@@ -26,14 +26,6 @@ public class Admin extends Usuario {
 
     }
 
-    // vetarNumero
-    // Función encargada de prohibir el uso de ciertos numero
-    public void vetarNumero(int numero){
-
-
-
-    }
-
     // escogerFecha
     // Función encargada de establecer la hora a la que se realiza el sorteo
     public void escogerFecha(Juego juego, String fecha){
