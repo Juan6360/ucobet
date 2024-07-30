@@ -33,7 +33,6 @@ public class Juego {
     public void mostrarBalance() {
 
     }
-
     // multiplicarPuja
     // Función encargada de mutliplicar la recompensa por cada peso invertido
     public void multiplicadorPuja(){
