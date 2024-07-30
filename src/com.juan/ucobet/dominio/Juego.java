@@ -26,7 +26,6 @@ public class Juego {
     public List<Usuario> realizarSorteo(){
 
         return null;
-
     }
 
     // mostrarGanancias

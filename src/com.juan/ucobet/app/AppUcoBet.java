@@ -213,7 +213,6 @@ public class AppUcoBet {
 
                         // Ciclo submenu admin
                         while (opc_admin != 4){
-
                             // Menu sorteo
 
                             System.out.println("1. Crear un sorteo.");
