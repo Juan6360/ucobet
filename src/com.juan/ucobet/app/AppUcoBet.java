@@ -5,14 +5,17 @@ import com.juan.ucobet.dominio.Admin;
 import com.juan.ucobet.dominio.Juego;
 import com.juan.ucobet.dominio.Usuario;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.util.Scanner;
 
 import static java.lang.StringTemplate.STR;
 
 public class AppUcoBet {
         public static void main(String[] args) {
+
+            DateTimeFormatter formato = DateTimeFormatter.ofPattern("dd-MM-yy HH:mm");
 
             Juego juego = new Juego();
             Scanner in = new Scanner(System.in);
@@ -92,6 +95,7 @@ public class AppUcoBet {
 
                         // Creacion del usuario
                         Usuario nuevoUsuario = new Usuario(nombre, identificacion, correo, celular);
+                        juego.registrarUsuario(nuevoUsuario);
 
                         // Ciclo del submenu de usuario
                         while(opc_usuario != 3){
@@ -112,7 +116,7 @@ public class AppUcoBet {
 
                                     // Menu del juego
 
-                                    System.out.println(STR."Recompensas: \nFecha: \{juego.getFecha()} | \{juego.getHora()}");
+                                    System.out.println(STR."Recompensas: \nFecha: \{juego.getFecha().format(formato)}");
                                     System.out.println(STR."Sorteo una cifra: \{juego.getRecompensaUnaCifra()}");
                                     System.out.println(STR."Sorteo dos cifras: \{juego.getRecompensaDosCifras()}");
                                     System.out.println(STR."Sorteo tres cifras: \{juego.getRecompensaTresCifras()}");
@@ -129,7 +133,7 @@ public class AppUcoBet {
 
                                             in.nextLine(); // Limpiar el buffer
 
-                                            System.out.println("Los numeros vetados son: "+ juego.getNumerosVetados());
+                                            System.out.println(STR."Los numeros vetados son: \{juego.getNumerosVetados()}");
 
                                             // Logica para la creacion de boletas
                                             System.out.println("Ingrese numero a jugar: ");
@@ -222,9 +226,40 @@ public class AppUcoBet {
 
                                     // Logica para la creacion de un sorteo
 
-                                // Vetar numeros
+                                    in.nextLine(); // Limpiar el buffer
+
+                                    System.out.println("Ingrese el dia en que juega (dd-MM-yy HH:mm): ");
+                                    String fecha = in.nextLine();
+
+                                    // Invocacion de la funcion escogerFecha en Admin
+                                    nuevoAdmin.escogerFecha(juego, fecha);
+
+                                    System.out.println("Ingrese el multiplicador (0.0): ");
+                                    double mult = Double.parseDouble(in.nextLine());
+
+                                    nuevoAdmin.escogerMultiplicador(juego, mult);
+
+                                    System.out.println("Recompensa por obtener una cifra correcta: ");
+                                    long recompensaUnaCifra = Long.parseLong(in.nextLine());
+
+                                    System.out.println("Recompensa por obtener dos cifras correctas: ");
+                                    long recompensaDosCifras = Long.parseLong(in.nextLine());
+
+                                    System.out.println("Recompensa por obtener tres cifras correctas: ");
+                                    long recompensaTresCifras = Long.parseLong(in.nextLine());
+
+                                    System.out.println("Recompensa por obtener cuatro cifras correctas: ");
+                                    long recompensaCuatroCifras = Long.parseLong(in.nextLine());
+
+                                    // Invocacion metodo para establecer recompensa
+
+                                    nuevoAdmin.escogerRecompensa(juego, recompensaUnaCifra, recompensaDosCifras, recompensaTresCifras, recompensaCuatroCifras);
+
+                                    break;
+
+                                    // Vetar numeros
                                 case 2:
-                                    // pregunta cuantos son los numeros que se van a vetar en el sorteo actual
+                                    // Pregunta cuantos son los numeros que se van a vetar en el sorteo actual
                                     System.out.println("¿cuantos numeros va a vetar del sorteo?");
                                     int cantidadNumVetar = in.nextInt();
 
@@ -236,10 +271,13 @@ public class AppUcoBet {
                                         juego.numerosAVetar(varNumVetar);
                                     }
 
-                                    System.out.println("Numeros vetados: "+ juego.getNumerosVetados());
+                                    System.out.println(STR."Numeros vetados: \{juego.getNumerosVetados()}");
+
+                                    break;
 
                                 // Mostrar balance
                                 case 3:
+
 
                                 // Volver al menu 1
                                 case 4:
