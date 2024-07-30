@@ -37,7 +37,7 @@ public class Juego {
     // pagarUsuarios
     public void pagarGanadoresUnaCifra(List<Usuario> ganadores){
 
-        ganadores.stream().filter(u -> u.getBoletas().forEach(b -> String.valueOf(b.getNumero())));
+//        ganadores.stream().filter(u -> u.getBoletas().forEach(b -> String.valueOf(b.getNumero())));
 
 //        ganadores.forEach(u -> u.getBoletas().forEach(b -> this.deudas += (long) (this.recompensaUnaCifra * (b.getPuja() + (b.getPuja() * this.porcentajeMultiplicador)))));
 
@@ -98,6 +98,10 @@ public class Juego {
         return false;
     }
     // Getters
+
+    public List<Usuario> getUsuarios() {
+        return usuarios;
+    }
 
     public LocalDateTime getFecha() {
         return fecha;

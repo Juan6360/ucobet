@@ -30,6 +30,17 @@ public class Usuario {
 
     // Getters
 
+    public long getCelular() {
+        return celular;
+    }
+
+    public String getCorreo() {
+        return correo;
+    }
+
+    public long getIdentificacion() {
+        return identificacion;
+    }
 
     public List<Boleta> getBoletas() {
         return boletas;
