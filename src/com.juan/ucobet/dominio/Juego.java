@@ -54,7 +54,6 @@ public class Juego {
 
     public void mostrarBoletas(Usuario usuario){
 
-
         usuario.getBoletas().forEach(b -> System.out.println(b.toString()));
 
     }
