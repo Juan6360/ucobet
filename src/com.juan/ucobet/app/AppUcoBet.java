@@ -8,11 +8,25 @@ import com.juan.ucobet.dominio.Usuario;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
+import java.util.Date;
 import java.util.Scanner;
+import java.util.Timer;
+import java.util.TimerTask;
 
 import static java.lang.StringTemplate.STR;
 
 public class AppUcoBet {
+
+    //The task which you want to execute
+    private static class MyTimeTask extends TimerTask
+    {
+
+        public void run()
+        {
+            System.out.println("Ejecutado!");
+        }
+    }
+
     public static void main(String[] args) {
 
         DateTimeFormatter formato = DateTimeFormatter.ofPattern("dd-MM-yy HH:mm");
@@ -269,6 +283,8 @@ public class AppUcoBet {
                                 // Invocacion metodo para establecer recompensa
 
                                 nuevoAdmin.escogerRecompensa(juego, recompensaUnaCifra, recompensaDosCifras, recompensaTresCifras, recompensaCuatroCifras);
+                                juego.iniciarMonitoreoCierre();
+                                juego.iniciarMonitoreoDeSorteo();
 
                                 break;
 

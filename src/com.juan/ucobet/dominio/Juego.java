@@ -1,5 +1,6 @@
 package com.juan.ucobet.dominio;
 
+import java.time.Duration;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -14,6 +15,7 @@ public class Juego {
     private List<String> numerosVetados = new ArrayList<String>();
     private int numeroGanador;
     private LocalDateTime fecha;
+    private LocalDateTime fechaCierreReal;
     private double porcentajeMultiplicador;
     private long recompensaUnaCifra;
     private long recompensaDosCifras;
@@ -30,6 +32,8 @@ public class Juego {
     // realizarSorteo
     // Función responsable de comparar las boletas existentes con los números ganadores y devolver una lista de usuarios
     public List<Usuario> realizarSorteo(){
+
+        System.out.println("Sorteo realizado!");
 
         return this.usuarios.stream().filter(u -> u.getBoletas().stream().anyMatch(b -> {
                                                                                         if (String.valueOf(b.getNumero()).equals(String.valueOf(this.numeroGanador))){
@@ -141,7 +145,10 @@ public class Juego {
 
     public void setFecha(LocalDateTime fecha) {
         this.fecha = fecha;
+        // Calcular la fecha de cierre real restando 5 minutos
+        this.fechaCierreReal = fecha.minusMinutes(5);
     }
+
 
     public void setNumeroGanador(int numeroGanador) {
         this.numeroGanador = numeroGanador;
@@ -166,4 +173,50 @@ public class Juego {
     public void setRecompensaCuatroCifras(long recompensaCuatroCifras) {
         this.recompensaCuatroCifras = recompensaCuatroCifras;
     }
+
+    // Metodo para iniciar el monitoreo del cierre del sorteo
+    public void iniciarMonitoreoCierre() {
+        new Thread(() -> {
+            while (LocalDateTime.now().isBefore(fechaCierreReal)) {
+                try {
+                    Thread.sleep(1000); // 1 segundo
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+            cerrarSorteo();
+        }).start();
+    }
+
+    public void iniciarMonitoreoDeSorteo() {
+        new Thread(() -> {
+            while (true) {
+                LocalDateTime ahora = LocalDateTime.now();
+
+                if (ahora.isAfter(fecha)) {
+                    realizarSorteo();
+                    break; // Salir del bucle después de realizar el sorteo
+                }
+
+                // Calcular el tiempo restante hasta la fecha del sorteo
+                Duration duration = Duration.between(ahora, fecha);
+                long millisUntilSorteo = duration.toMillis();
+
+                // Dormir el hilo por el tiempo restante o una cantidad fija
+                try {
+                    Thread.sleep(Math.min(millisUntilSorteo, 1000)); // 1 segundo o el tiempo restante
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+        }).start();
+    }
+
+    // Metodo para cerrar el sorteo
+    public void cerrarSorteo() {
+        System.out.println("El sorteo ha sido cerrado.");
+        // Aquí puedes agregar la lógica para cerrar el sorteo y notificar a los usuarios
+    }
+
+
 }
