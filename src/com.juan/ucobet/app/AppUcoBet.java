@@ -121,7 +121,6 @@ public class AppUcoBet {
                                     System.out.println("2. Volver.");
                                     opc_boleta = in.nextInt();
 
-
                                     // Switch para el juego
                                     switch (opc_boleta){
 
@@ -129,19 +128,12 @@ public class AppUcoBet {
                                         case 1:
 
                                             in.nextLine(); // Limpiar el buffer
-                                            int numero = 0;
-                                            boolean condicion ;
-                                            do{
-                                                System.out.println("Los numeros vetados son: "+ juego.getNumerosVetados());
 
-                                                // Logica para la creacion de boletas
-                                                System.out.println("Ingrese numero a jugar: ");
-                                                numero = Integer.parseInt(in.nextLine());
+                                            System.out.println("Los numeros vetados son: "+ juego.getNumerosVetados());
 
-                                                condicion = juego.comparadorNumerosVetados(numero);
-
-
-                                            }while(condicion == true);
+                                            // Logica para la creacion de boletas
+                                            System.out.println("Ingrese numero a jugar: ");
+                                            int numero = Integer.parseInt(in.nextLine());
 
                                             System.out.println("Ingrese numero la puja: ");
                                             int puja = Integer.parseInt(in.nextLine());
@@ -253,6 +245,7 @@ public class AppUcoBet {
                             }
                         }
                 }
+
             }
         }
     }

@@ -1,9 +1,12 @@
 package com.juan.ucobet.dominio;
 
+import com.juan.ucobet.dominio.Boleta;
+import com.juan.ucobet.dominio.Juego;
+import com.juan.ucobet.dominio.Usuario;
 
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
-import java.time.format.DateTimeParseException;
+import java.time.LocalDate;
+import java.util.Date;
+import java.util.Locale;
 
 public class Admin extends Usuario {
 
@@ -32,46 +35,19 @@ public class Admin extends Usuario {
     // Función encargada de prohibir el uso de ciertos numero
     public void vetarNumero(int numero){
 
-
-
     }
 
     // escogerFecha
     // Función encargada de establecer la hora a la que se realiza el sorteo
-    public void escogerFecha(Juego juego, String fecha){
+    public void escogerFecha(Juego juego, LocalDate fecha){
 
-        DateTimeFormatter formato = DateTimeFormatter.ofPattern("dd-MM-yy HH:mm");
-
-        try {
-
-            LocalDateTime dateTime = LocalDateTime.parse(fecha, formato);
-            System.out.println(STR."Fecha y hora ingresadas: \{dateTime.format(formato)}");
-
-            juego.setFecha(dateTime);
-
-        } catch (DateTimeParseException e){
-
-            System.out.println("Formato fecha y hora incorrecto");
-
-        }
+        juego.setFecha(fecha);
 
     }
 
     // escogerMultiplicador
     // Función encargada de establecer el porcentaje por el cual las recompensas seran multiplicadas
-    public void escogerMultiplicador(Juego juego, double porcentaje){
-
-        juego.setPorcentajeMultiplicador(porcentaje);
-
-    }
-
-    // escogerRecompensa
-    public void escogerRecompensa(Juego juego, long recompensaUnaCifra, long recompensaDosCifras, long recompensaTresCifras, long recompensaCuatroCifras){
-
-        juego.setRecompensaUnaCifra(recompensaUnaCifra);
-        juego.setRecompensaDosCifras(recompensaDosCifras);
-        juego.setRecompensaTresCifras(recompensaTresCifras);
-        juego.setRecompensaCuatroCifras(recompensaCuatroCifras);
+    public void escogermultiplicador(double porcentaje){
 
     }
 }

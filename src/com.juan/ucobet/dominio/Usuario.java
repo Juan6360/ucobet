@@ -21,8 +21,6 @@ public class Usuario {
 
     }
 
-    // Metodos
-
     public void crearBoleta(int numero, int puja){
 
         Boleta boleta = new Boleta(numero, puja);
