@@ -121,7 +121,6 @@ public class AppUcoBet {
                                     System.out.println("2. Volver.");
                                     opc_boleta = in.nextInt();
 
-
                                     // Switch para el juego
                                     switch (opc_boleta){
 
