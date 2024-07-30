@@ -5,7 +5,11 @@ import com.juan.ucobet.dominio.Admin;
 import com.juan.ucobet.dominio.Juego;
 import com.juan.ucobet.dominio.Usuario;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
+
+import static java.lang.StringTemplate.STR;
 
 public class AppUcoBet {
         public static void main(String[] args) {
@@ -125,6 +129,8 @@ public class AppUcoBet {
 
                                             in.nextLine(); // Limpiar el buffer
 
+                                            System.out.println("Los numeros vetados son: "+ juego.getNumerosVetados());
+
                                             // Logica para la creacion de boletas
                                             System.out.println("Ingrese numero a jugar: ");
                                             int numero = Integer.parseInt(in.nextLine());
@@ -167,6 +173,7 @@ public class AppUcoBet {
                             }
 
                         }
+                        break;
 
                     // Aplicacion Admin
                     case 2:
@@ -217,6 +224,19 @@ public class AppUcoBet {
 
                                 // Vetar numeros
                                 case 2:
+                                    // pregunta cuantos son los numeros que se van a vetar en el sorteo actual
+                                    System.out.println("¿cuantos numeros va a vetar del sorteo?");
+                                    int cantidadNumVetar = in.nextInt();
+
+                                    //for que ingresa los numeros que se vetaran
+                                    for (int i = 0; i < cantidadNumVetar ; i++) {
+                                        System.out.println("Ingresa el nuermo que vas a vetar");
+                                        int varNumVetar = in.nextInt();
+
+                                        juego.numerosAVetar(varNumVetar);
+                                    }
+
+                                    System.out.println("Numeros vetados: "+ juego.getNumerosVetados());
 
                                 // Mostrar balance
                                 case 3:

@@ -3,14 +3,13 @@ package com.juan.ucobet.dominio;
 import java.time.Clock;
 import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
-import java.util.stream.Collectors;
 
 public class Juego {
 
     // Atributos
     private List<Usuario> usuarios = new ArrayList<>();
+    private List<Integer> numerosVetados = new ArrayList<>();
     private int numeroGanador;
     private Clock hora;
     private LocalDate fecha;
@@ -59,6 +58,13 @@ public class Juego {
 
     }
 
+    public void numerosAVetar(int numeroAVetar){
+        //agrega los numeros a la lista numerosVetados
+        numerosVetados.add(numeroAVetar);
+
+
+    }
+
     // Getters
 
 
@@ -86,6 +92,15 @@ public class Juego {
         return recompensaCuatroCifras;
     }
 
+    //get para obtener la lista de numeros Vetados
+    public String getNumerosVetados() {
+        String datosArray = "";
+        for (int elemento: numerosVetados) {
+            datosArray += elemento + " ";
+        }
+        return datosArray;
+    }
+
     // Setters
 
     public void setFecha(LocalDate fecha) {
@@ -95,4 +110,6 @@ public class Juego {
     public void setNumeroGanador(int numeroGanador) {
         this.numeroGanador = numeroGanador;
     }
+
+
 }
