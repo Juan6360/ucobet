@@ -97,14 +97,10 @@ public class Juego {
 
     }
 
-    public void numerosAVetar(int numeroAVetar){
+    public void numerosAVetar(int numeroAVetar) {
         //agrega los numeros a la lista numerosVetados
         numerosVetados.add(String.valueOf(numeroAVetar));
-
-
     }
-
-
     public boolean comparadorNumerosVetados(int numero){
         List<Character> listaCaracteres = new ArrayList<>();
 
@@ -120,6 +116,9 @@ public class Juego {
 
         return false;
     }
+
+
+
     // Getters
 
     public List<Usuario> getUsuarios() {

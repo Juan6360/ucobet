@@ -35,39 +35,6 @@ public class AppUcoBet {
         Scanner in = new Scanner(System.in);
         int opc = 0;
 
-            /*
-            Menu 1:
-            - Opcion ingreso como usuario
-
-            - Opcion ingreso como admin
-
-            - Opcion exit
-
-            Menu 2:
-            Submenu de usuario:
-            - Opcion de jugar
-                * Mostrar la informacion de cada sorteo (recompensa y la fecha)
-                    + El usuario debe subministrar la informacion de su boleta
-
-            - Opcion de ver historial
-                * Mostrar las boletas que a creado el usuario
-
-            - Salir del programa
-                * Me devuelve al menu 1
-
-            Submenu de administrador:
-            - Opcion de crear un sorteo (ecoger numero ganador)
-                * Ingresa dia en que juega
-                * Ingresa la recompensa
-                * Ingresa porcentaje multiplicador (Se ingresa como entero y luego se divide por 100)
-
-            - Opcion de vetar numeros
-
-            - Opcion mostrar balance
-
-            - Salir del programa
-                * Me devuelve al menu 1
-             */
 
         // Inicio de la app
 
@@ -78,7 +45,7 @@ public class AppUcoBet {
             System.out.println("Bienvenido a UCO BET, seleccione una opción:");
             System.out.println("1.- Usuario");
             System.out.println("2.- Administrador");
-            System.out.println("3.- Exit");
+            System.out.println("3.- Salir de la app");
             opc = in.nextInt();
 
             // Switch del menu principal
@@ -222,7 +189,7 @@ public class AppUcoBet {
                     System.out.println("Ingrese su celular: ");
                     long celular_admin = Long.parseLong(in.nextLine());
 
-                    System.out.println("Ingrese su password: ");
+                    System.out.println("Ingrese su password: "); //Españolll!!!!! (((Clave)))
                     String pass = in.nextLine();
 
                     // Creacion del admin
@@ -330,8 +297,6 @@ public class AppUcoBet {
                         }
                     }
             }
-
         }
-
     }
 }
